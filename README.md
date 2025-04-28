@@ -9,9 +9,12 @@ It connects **frozen vision and language encoders** using small trainable projec
 This repository contains the code and datasets associated with our CVPR 2025 paper:
 
 > **Harnessing Frozen Unimodal Encoders for Flexible Multimodal Alignment**
+
 This framework is built on the premise that semantically similar vision and language embedding spaces can be aligned through simple projection transformations. For example, by aligning DINOv2 with the Sentence-Transformer model `all-roberta-large-v1`, we achieve a remarkable **76% zero-shot ImageNet accuracy**, surpassing comparable CLIP models while reducing alignment compute by **65x** and paired data requirements by **20x**.
 
 We believe this approach holds immense potential for further advancements. We invite the open-source community to explore aligning newer, more powerful vision and language encoders to develop high-performing CLIP-like models with minimal effort. Notably, recent improvements in language models on the MTEB benchmark and advancements in SSL vision models present exciting opportunities for experimentation and innovation.
+
+
 
 ---
 
@@ -31,7 +34,7 @@ We believe this approach holds immense potential for further advancements. We in
 
 ---
 
-## ⚡ Quickstart
+## ⚡ Setup
 
 ```bash
 # Clone the repository
@@ -42,6 +45,7 @@ cd freeze-align
 conda env create -f environment.yaml
 conda activate freeze-align
 
+```
 
 ---
 
