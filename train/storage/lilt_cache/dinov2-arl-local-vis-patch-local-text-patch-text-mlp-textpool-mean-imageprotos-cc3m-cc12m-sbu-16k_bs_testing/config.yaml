@@ -1,0 +1,55 @@
+adapter_append: false
+add_adapter: false
+alpha: 0
+always_freeze:
+  text_encoder: []
+  visual_encoder: []
+batch_size_test: 512
+batch_size_train: 32
+bitfit: false
+classification_config: {import_path: classification.evaluation_token_average_fast_vdt,
+  import_path_vdt: classification.evaluation_token_average_fast_vdt}
+cls_vision_projection: patch
+conventional_adapter: {insert: false, reduction_factor: 4}
+dataset_size: 5000000
+disable_wandb: false
+embed_dim: 1024
+fg_thresh: null
+fp16: true
+freeze_proj: false
+freeze_text_encoder: true
+freeze_vision_encoder: true
+global_loss_weight: 1.0
+gradient_accumulation_steps: 1
+image_res: 256
+image_root: /notebooks/data/flickr30k/flickr30k_images/flickr30k_images/
+imagenet_path: /FEAT/data/imagenet/imagenet_new/
+imagenetv2_path: /notebooks/data/imagenetv2/ImageNetV2/imagenetv2-matched-frequency-format-val/
+k_test: 128
+limit_num_samples: false
+load_strict: true
+local_loss_weight: 0.0
+local_text_projection: patch
+local_vision_projection: patch
+model_config: {import_path: models.clip_adjustable_combined_vis_cls.CLIP}
+optimizer: {lr: 0.001, opt: adamW, weight_decay: 0.02}
+pretrained_text: true
+pretrained_vision: true
+save_last_only: false
+schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 15, lr: 0.001, min_lr: 1e-05,
+  sched: cosine, warmup_epochs: 10, warmup_lr: 1e-05}
+temp: 0.07
+test_file: /notebooks/data/flickr30k/flickr30-test-pairs.json
+text_encoder: sentence-transformers/all-roberta-large-v1
+text_pooling: mean
+text_projection: mlp
+train_file: ['/notebooks/data/cc3m/train/{00000..00010}.tar']
+trainset: cc3m
+unlock_attn: false
+unlock_dense: false
+unlock_layernorm: false
+unlock_random: false
+val_file: /notebooks/data/flickr30k/flickr30-test-pairs.json
+version: 2
+vis_pooling: mean
+vision_encoder: facebook/dinov2-large

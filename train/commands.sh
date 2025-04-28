@@ -1,0 +1,3 @@
+# python -m torch.distributed.launch --master_port=43770 --nproc_per_node=1     --use_env PretrainHydra.py --config dinov2-arl  --output_dir ./storage/lilt_cache/dino-arl-bitfit-ss-32/ --overrides +save_last_only=True  fp16=True
+# python -m torch.distributed.launch --master_port=43770 --nproc_per_node=1     --use_env PretrainHydra.py --config dinov2-arl-adapters  --output_dir ./storage/lilt_cache/dino-arl-adapters-ss-32/ --overrides +save_last_only=True  fp16=True
+python -m torch.distributed.launch --master_port=43770 --nproc_per_node=1     --use_env PretrainHydra.py --config dinov2-arl-adapters-bitfit  --output_dir ./storage/lilt_cache/dino-arl-adapters-bitfit-ss-32/ --overrides +save_last_only=True  fp16=True

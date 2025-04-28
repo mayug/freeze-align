@@ -1,0 +1,96 @@
+version: 2
+train_file: [
+
+  # "/home/storage/classwise_collection/laion_4k_cls_5k_samples/{00000..01363}.tar"
+  # "/home/storage/classwise_collection/imgprotos_128shot_5000samples/{00000..00504}.tar"
+  '/notebooks/data/flickr30k/flickr30k-train-pairs.json'
+  # "/notebooks/data/cc3m/train/{00000..00331}.tar",
+  # "/notebooks/data/cc3m/train/{00000..00331}.tar"
+
+]
+
+#val_file: '/notebooks/data/flickr30k/flickr30-test-pairs.json' 
+#test_file: '/notebooks/data/flickr30k/flickr30-test-pairs.json'
+#image_root: '/notebooks/data/flickr30k/flickr30k_images/flickr30k_images/'  
+
+
+val_file: '/notebooks/data/coco/coco_val.json'                
+test_file: '/notebooks/data/coco/coco_val.json'
+image_root: '/notebooks/data/coco/val2017/'  
+
+
+
+# imagenet_path: "/home/storage/datasets/imagenet_new/"
+imagenet_path: "/FEAT/data/imagenet/imagenet_new/"
+imagenetv2_path: "/notebooks/data/imagenetv2/ImageNetV2/imagenetv2-matched-frequency-format-val/"
+
+# trainset
+
+trainset: cc3m
+dataset_size: 5000000
+
+image_res: 256
+embed_dim: 768
+batch_size_train: 1800
+batch_size_test: 512
+k_test: 128
+temp: 0.07
+gradient_accumulation_steps: 1
+
+optimizer: {opt: adamW, lr: 1e-3, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 1e-3, epochs: 15, min_lr: 1e-5, decay_rate: 1, warmup_lr: 1e-5, warmup_epochs: 10, cooldown_epochs: 0}
+
+disable_wandb: false
+
+text_encoder: openai/clip-vit-large-patch14
+vision_encoder: facebook/dinov2-large
+pretrained_text: true
+pretrained_vision: true
+freeze_text_encoder: true
+freeze_vision_encoder: true
+freeze_proj: false 
+unlock_layernorm: false
+add_adapter: false
+adapter_append: false
+fp16: true
+limit_num_samples: false
+unlock_dense: false
+unlock_attn: false
+unlock_random: false
+bitfit: false
+
+local_vision_projection: 'patch'
+vis_pooling: 'mean'
+text_pooling: 'cls'
+
+text_projection: 'identity'
+local_text_projection: 'identity'
+
+# loss weights
+global_loss_weight: 1.0
+local_loss_weight: 0.0 # local loss weights are set to 0, it doesnt help
+fg_thresh: null
+
+
+
+# Can be set to False if, for example, you are adding adapters
+# to a pretrained model before loading weights (common case).
+load_strict: true
+
+model_config:
+  import_path: models.clip_adjustable_combined.CLIP
+
+classification_config:
+  import_path: classification.evaluation_token_average_fast_vdt
+  import_path_vdt: classification.evaluation_token_average_fast_vdt
+
+conventional_adapter:
+  insert: false
+  reduction_factor: 4
+
+always_freeze:
+  visual_encoder: []
+  text_encoder: []
+
+# Not used, just there for backwards compatibility.
+alpha: 0

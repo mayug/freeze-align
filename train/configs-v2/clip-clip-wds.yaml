@@ -1,0 +1,83 @@
+version: 2
+train_file: [
+  # "./storage/10/coco2017/pretrain-pairs.json",
+  #"/home/storage/collection_code/laion400m-CC/{00000..00419}.tar",
+  # "/home/storage/datasets/data_new/new_data/{00000..00867}.tar"
+  # "/home/storage/laion400m-data-50M/{00000..05380}.tar"
+  # "/home/storage/classwise_collection/laion_4k_cls_5k_samples/{00000..01363}.tar"
+  "/home/storage/classwise_collection/imgprotos_128shot_5000samples/{00000..00504}.tar"
+  # "/notebooks/data/cc3m/train/{00000..00331}.tar"
+  #"/home/storage/classwise_collection/laion_4k_cls_500_samples/{00000..00165}.tar"
+  # "/home/storage/10/visual-genome-sandbox/visual-genome-pairs.json",
+  # "./storage/10/sbu-captions/sbu-pretrain-pairs.json",
+  # "./storage/10/cc3m/cc3m-train-pairs.json",
+  # "./storage/10/cc3m/cc3m-val-pairs.json",
+]
+
+imagenet_path: "/home/storage/datasets/imagenet_new/"
+imagenetv2_path: "/notebooks/data/imagenetv2/ImageNetV2/imagenetv2-matched-frequency-format-val/"
+
+# trainset
+
+trainset: cc3m
+dataset_size: 5000000
+
+image_res: 224
+embed_dim: 768
+batch_size_train: 1800
+batch_size_test: 512
+k_test: 128
+temp: 0.07
+gradient_accumulation_steps: 1
+
+optimizer: {opt: adamW, lr: 1e-3, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 1e-3, epochs: 15, min_lr: 1e-5, decay_rate: 1, warmup_lr: 1e-5, warmup_epochs: 10, cooldown_epochs: 0}
+
+disable_wandb: false
+
+text_encoder: openai/clip-vit-large-patch14
+vision_encoder: openai/clip-vit-large-patch14
+pretrained_text: true
+pretrained_vision: true
+freeze_text_encoder: true
+freeze_vision_encoder: true
+freeze_proj: false 
+unlock_layernorm: false
+add_adapter: false
+adapter_append: false
+fp16: true
+limit_num_samples: false
+unlock_dense: false
+unlock_attn: false
+unlock_random: false
+bitfit: false
+
+
+
+# loss weights
+global_loss_weight: 1.0
+local_loss_weight: 0.0 # local loss weights are set to 0, it doesnt help
+fg_thresh: null
+
+
+
+# Can be set to False if, for example, you are adding adapters
+# to a pretrained model before loading weights (common case).
+load_strict: true
+
+model_config:
+  import_path: models.clip_adjustable_token_average_custom_fg_sep.CLIP
+
+classification_config:
+  import_path: classification.evaluation_token_average_fast_vdt
+
+conventional_adapter:
+  insert: false
+  reduction_factor: 4
+
+always_freeze:
+  visual_encoder: []
+  text_encoder: []
+
+# Not used, just there for backwards compatibility.
+alpha: 0
