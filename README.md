@@ -20,8 +20,10 @@ We believe this approach holds immense potential for further advancements. We in
 
 ## 📚 Resources
 - **[Paper](https://arxiv.org/abs/2409.19425)**
+- **[Concept Coverage Dataset 6M](https://huggingface.co/datasets/mayug/concept_coverage_laion_6m)**
 - **[Video]** (Coming soon)
 - **[Slides]** (Coming soon)
+
 
 ---
 
@@ -30,7 +32,7 @@ We believe this approach holds immense potential for further advancements. We in
 - Lightweight training using **frozen** unimodal backbones
 - Curate high-quality datasets from **LAION** or other pools to enable efficient alignment
 - Supports flexible vision encoders (huggingface transformers) and language encoders (sentence transformers)
-- Drastically **reduced compute and data requirements**. For instance we outperform OpenAI , LAION CLIP models with 20x less paired data nd 65x less compute. 
+- Drastically **reduced compute and data requirements**. For instance we outperform OpenAI , LAION CLIP models with 20x less paired data and 65x less compute. 
 
 ---
 
@@ -76,7 +78,7 @@ Train lightweight projectors between frozen encoders.
     - CC3M
     - CC12M
     - SBU
-    - LAION class-collected 6M ([Google Drive](https://drive.google.com/file/d/1h-fkZx5d0xmTNQLXwgBLBC9RiafITy-o/view?usp=sharing), Hugging Face link coming soon)
+    - LAION class-collected 6M ([Google Drive](https://drive.google.com/file/d/1h-fkZx5d0xmTNQLXwgBLBC9RiafITy-o/view?usp=sharing), [Hugging Face](https://huggingface.co/datasets/mayug/concept_coverage_laion_6m))
     - ImageNet validation set
 2. **Configure dataset paths** in `dinov2-arl-wds-combined.yaml`.
 3. **Set up environment:**
@@ -131,10 +133,10 @@ python collect_fast.py --parts <NUM_PARTS> --max <MAX_SAMPLES>
 ---
 
 ## 🛠️ Planned Improvements (TODO)
-- [ ] Publish class-collected datasets to Hugging Face Datasets
-- [ ] Add `push_to_hub` utility for uploading trained models
-- [ ] Release Colab demos for alignment and training
-- [ ] Add support for additional vision backbones (SAM, EVA-CLIP, etc.)
+- ✅ Publish class-collected datasets to Hugging Face Datasets
+- ⬜ Add `push_to_hub` utility for uploading trained models
+- ⬜ Release Colab demos for alignment and training
+- ⬜ Add support for additional vision backbones (e.g., SAM, EVA-CLIP)
 
 ---
 
