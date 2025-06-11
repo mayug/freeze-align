@@ -1,4 +1,4 @@
-# freeze-align
+# freeze-align: Harnessing Frozen Unimodal Encoders for Flexible Multimodal Alignment CVPR 2025
 
 
 # 🚀 Let's Align Modalities Efficiently!
